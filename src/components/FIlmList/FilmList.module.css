@@ -1,0 +1,21 @@
+.films {
+  min-height: 100vh;
+  padding: 30px 0px 0px;
+  background: linear-gradient(
+    109.6deg,
+    rgb(43, 1, 91) 13.4%,
+    rgb(55, 0, 24) 100.2%
+  );
+  color: #fff;
+}
+
+.title {
+  font-size: 60px;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+.films__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+}
