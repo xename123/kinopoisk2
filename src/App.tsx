@@ -1,4 +1,3 @@
-import "./App.css";
 import FilmList from "@/components/FIlmList/FilmList";
 
 function App() {

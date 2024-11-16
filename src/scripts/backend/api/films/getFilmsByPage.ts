@@ -1,6 +1,6 @@
 import { endpoints } from "@/backend/constansts/filmsURL";
 import { Film } from "@/types/types";
-import axios from "axios";
+import { getRequestToFilmApi } from "./requestsApi";
 
 type filmData = {
   items: Film[];
@@ -9,11 +9,7 @@ type filmData = {
 };
 
 export default async function getFilmByPage(page: number): Promise<filmData> {
-  const response = await axios.get(`${endpoints.films}?page=${page}`, {
-    headers: {
-      "X-API-KEY": import.meta.env.VITE_kinopois_api,
-      "Content-Type": "application/json",
-    },
-  });
-  return response.data;
+  const response = await getRequestToFilmApi(`${endpoints.films}?page=${page}`);
+  const data = response.data;
+  return data;
 }
