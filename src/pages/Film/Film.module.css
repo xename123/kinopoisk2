@@ -1,0 +1,49 @@
+.film {
+  padding: 30px 0px;
+}
+.film__detailed {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 100px;
+}
+.film__title {
+  font-size: 40px;
+}
+.film__title:not(:last-child) {
+  margin-bottom: 10px;
+}
+.film__genres {
+  font-style: italic;
+}
+.film__genres:not(:last-child) {
+  margin-bottom: 30px;
+}
+.film__description:not(:last-child) {
+  margin-bottom: 30px;
+}
+.film-card__rate {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+}
+.film-card__rate:not(:last-child) {
+  margin-bottom: 20px;
+}
+.film-card__rate span {
+  font-size: 30px;
+}
+.film-card__rate img {
+  width: 70px;
+  height: 70px;
+}
+.film__watch {
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: #b18026;
+  transition: all 0.3s ease 0s;
+}
+@media (any-hover: hover) {
+  .film__watch:hover {
+    background-color: #917136;
+  }
+}
