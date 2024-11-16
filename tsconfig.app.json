@@ -29,7 +29,8 @@
       "@/utils/*": ["scripts/utils/*"],
       "@/types/*": ["types/*"],
       "@/ui/*": ["components/ui/*"],
-      "@/assets/*": ["assets/*"]
+      "@/assets/*": ["assets/*"],
+      "@/pages/*": ["pages/*"]
     }
   },
   "include": ["src"]
