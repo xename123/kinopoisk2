@@ -6,5 +6,8 @@ export async function getRequestToFilmApi(path: string) {
       "X-API-KEY": import.meta.env.VITE_kinopois_api,
       "Content-Type": "application/json",
     },
+    validateStatus: function (status) {
+      return status < 500;
+    },
   });
 }
