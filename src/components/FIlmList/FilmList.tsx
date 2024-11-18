@@ -13,6 +13,7 @@ const FilmList: FC = () => {
     const data = await getAllFilms();
     setFilms(data);
   });
+
   return (
     <section className={Styles["films"]}>
       <Container>
