@@ -1,15 +1,10 @@
 import { endpoints } from "@/backend/constansts/filmsURL";
-import { Film } from "@/types/types";
 import { getRequestToFilmApi } from "./requestsApi";
+import { AxiosResponse } from "axios";
 
-type filmData = {
-  items: Film[];
-  total: number;
-  totalPages: number;
-};
-
-export default async function getFilmByPage(page: number): Promise<filmData> {
+export default async function getFilmByPage(
+  page: number
+): Promise<AxiosResponse> {
   const response = await getRequestToFilmApi(`${endpoints.films}?page=${page}`);
-  const data = response.data;
-  return data;
+  return response;
 }
