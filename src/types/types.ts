@@ -1,3 +1,5 @@
+import { AxiosHeaders } from "axios";
+
 export type Countries = {
   country: string;
 };

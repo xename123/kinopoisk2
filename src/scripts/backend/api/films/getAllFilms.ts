@@ -8,10 +8,14 @@ export default async function getAllFilms(): Promise<Film[]> {
   let films: Film[] = [];
 
   while (page <= maxPages) {
-    const data = await getFilmByPage(page);
+    const response = await getFilmByPage(page);
+    if (response.status !== 200) {
+      break;
+    }
+    const data = response.data;
     maxPages = data.totalPages;
     films = [...films, ...data.items];
-    await pause(250);
+    await pause(300);
     page += 1;
   }
   return films;

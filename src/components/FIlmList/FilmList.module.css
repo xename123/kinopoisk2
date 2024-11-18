@@ -8,8 +8,16 @@
   font-weight: 300;
   margin-bottom: 30px;
 }
-.films__list {
+
+.films__list:has(div) {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px;
+}
+.loading {
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
