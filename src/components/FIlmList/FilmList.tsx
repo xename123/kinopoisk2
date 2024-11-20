@@ -1,38 +1,81 @@
 import Container from "@/components/containers/Container";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import Styles from "./FilmList.module.css";
 import useAsyncEffect from "@/hooks/useAsyncEffect";
-import getAllFilms from "@/backend/api/films/getAllFilms";
 import { Film } from "@/types/types";
 import FilmCard from "../FilmCard/FilmCard";
-import { isResponseOk } from "@/backend/api/api-utils";
+import getFilmByPage from "@/backend/api/films/getFilmsByPage";
+import Pagination from "../ui/Pagination/Pagination";
+import { useSearchParams } from "react-router-dom";
+import { searchStringToObject, updateInLocation } from "serialize-query-params";
 
 const FilmList: FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [films, setFilms] = useState<Film[] | null>(null);
+  const [page, setPage] = useState<number>(0);
+  const totalPages = 5;
+  const [lastPage, setLastPage] = useState<number>(0);
+
   const [message, setMessage] = useState<string>("Загрузка...");
-  useAsyncEffect(async () => {
-    const data = await getAllFilms();
-    if (data.length !== 0) {
-      setFilms(data);
-    } else {
-      setMessage("Не удалось получить фильмы");
-    }
+
+  useEffect(() => {
+    const params = searchStringToObject(searchParams.toString());
+    setPage(Number(params.page) || 1);
   }, []);
 
+  useAsyncEffect(async () => {
+    if (page) {
+      const response = await getFilmByPage(page);
+      updateUrl(page);
+      const data = response.data;
+      if (!lastPage) setLastPage(data.totalPages);
+      if (data.items.length !== 0) {
+        setFilms(data.items);
+      } else {
+        setMessage("Не удалось получить фильмы");
+      }
+    } else {
+      console.log(page);
+      setMessage("Выберете страницу");
+    }
+  }, [page]);
+
+  function updateUrl(page: number) {
+    const updatedSearch = updateInLocation(
+      { page: String(page) },
+      document.location
+    );
+    setSearchParams(updatedSearch.search);
+  }
+
+  function changePage(newPage: number) {
+    setPage(() => newPage);
+    setFilms(null);
+    setMessage("Загружаю новые фильмы");
+  }
   return (
     <section className={Styles["films"]}>
       <Container>
         <h1 className={Styles["title"]}>Самые Лучшие Фильмы</h1>
-        <div className={Styles["films__list"]}>
-          {films ? (
-            films.map((item, index) => {
-              return <FilmCard key={index} film={item} />;
-            })
-          ) : (
-            <p className={Styles["loading"]}>{message}</p>
-          )}
-        </div>
+        {films ? (
+          <>
+            <div className={Styles["films__list"]}>
+              {films.map((item, index) => {
+                return <FilmCard key={index} film={item} />;
+              })}
+            </div>
+            <Pagination
+              currentPage={page}
+              lastPage={lastPage}
+              maxLength={totalPages}
+              setCurrentPage={changePage}
+            />
+          </>
+        ) : (
+          <p className={Styles["loading"]}>{message}</p>
+        )}
       </Container>
     </section>
   );
