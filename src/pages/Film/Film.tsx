@@ -32,7 +32,7 @@ const Film = () => {
                 {filmData.year && `(${filmData.year})`}
               </h2>
               <p className={Styles["film__genres"]}>
-                Жанры: {filmData.genres?.map((item) => item.genre)}
+                Жанры: {filmData.genres?.map((item) => item.genre + " ")}
               </p>
               <p className={Styles["film__description"]}>
                 {filmData.description ||
