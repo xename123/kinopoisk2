@@ -1,0 +1,23 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  backdrop-filter: blur(50px);
+  background-color: #3333336a;
+  padding: 10px 0px;
+}
+.header > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__logo {
+  width: 80px;
+  height: 80px;
+}
+.header__list {
+  display: flex;
+  gap: 30px;
+}

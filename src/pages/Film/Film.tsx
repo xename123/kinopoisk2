@@ -7,13 +7,16 @@ import { useParams } from "react-router-dom";
 
 import Styles from "./Film.module.css";
 import star from "@/assets/reshot-icon-star-MHEGVSB4L7.svg";
+import ErrorPage from "../ErrorPage/ErrorPage";
 const Film = () => {
   let { filmId } = useParams<{ filmId: string }>();
   const [filmData, setFilmData] = useState<FilmDetailed | null>(null);
+  const [isFound, setIsFound] = useState<boolean>(true);
 
   useAsyncEffect(async () => {
     if (filmId) {
       const film: FilmDetailed = await getFilmById(filmId);
+      if (!film) setIsFound(false);
       setFilmData(film);
     }
   }, []);
@@ -21,7 +24,7 @@ const Film = () => {
   return (
     <div className={Styles["film"]}>
       <Container>
-        {filmData ? (
+        {filmData && (
           <div className={Styles["film__detailed"]}>
             <div className={Styles["film__image"]}>
               <img src={filmData.posterUrl} alt="image" />
@@ -32,7 +35,7 @@ const Film = () => {
                 {filmData.year && `(${filmData.year})`}
               </h2>
               <p className={Styles["film__genres"]}>
-                Жанры: {filmData.genres?.map((item) => item.genre)}
+                Жанры: {filmData.genres?.map((item) => item.genre + " ")}
               </p>
               <p className={Styles["film__description"]}>
                 {filmData.description ||
@@ -49,9 +52,8 @@ const Film = () => {
               </a>
             </div>
           </div>
-        ) : (
-          <p className={Styles["not-found"]}>Такой фильм не найден :(</p>
         )}
+        {isFound || <ErrorPage />}
       </Container>
     </div>
   );
