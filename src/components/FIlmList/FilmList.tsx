@@ -14,7 +14,7 @@ const FilmList: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [films, setFilms] = useState<Film[] | null>(null);
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
   const totalPages = 5;
   const [lastPage, setLastPage] = useState<number>(0);
 
@@ -26,19 +26,14 @@ const FilmList: FC = () => {
   }, []);
 
   useAsyncEffect(async () => {
-    if (page) {
-      const response = await getFilmByPage(page);
-      updateUrl(page);
-      const data = response.data;
-      if (!lastPage) setLastPage(data.totalPages);
-      if (data.items.length !== 0) {
-        setFilms(data.items);
-      } else {
-        setMessage("Не удалось получить фильмы");
-      }
+    updateUrl(page);
+    const response = await getFilmByPage(page);
+    const data = response.data;
+    if (!lastPage) setLastPage(data.totalPages);
+    if (data.items.length !== 0) {
+      setFilms(data.items);
     } else {
-      console.log(page);
-      setMessage("Выберете страницу");
+      setMessage("Не удалось получить фильмы");
     }
   }, [page]);
 

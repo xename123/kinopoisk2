@@ -18,7 +18,6 @@ export default function Pagination({
   setCurrentPage,
 }: Props) {
   const pageNums = getPaginationItems(currentPage, lastPage, maxLength);
-  console.log(currentPage);
   return (
     <nav className={Styles["pagination"]} aria-label="Pagination">
       <PageLink

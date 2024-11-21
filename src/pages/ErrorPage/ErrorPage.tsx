@@ -1,16 +1,13 @@
 import Container from "@/components/containers/Container";
 import { FC } from "react";
-import { useRouteError } from "react-router-dom";
-
+import error from "@/assets/404.jpg";
+import Styles from "./ErrorPage.module.css";
 const ErrorPage: FC = () => {
-  const error = useRouteError() as Error;
-  console.error(error);
-
   return (
-    <div id="error-page">
+    <div id={Styles["error-page"]}>
       <Container>
-        <h1>Oops!</h1>
-        <p>Sorry, an unexpected error has occurred.</p>
+        <img className={Styles["error-image"]} src={error} alt="error" />
+        <p className={Styles["error-text"]}>Что-то пошло не так</p>
       </Container>
     </div>
   );
