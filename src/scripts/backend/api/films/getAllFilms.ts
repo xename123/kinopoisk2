@@ -2,13 +2,13 @@ import { Film } from "@/types/types";
 import getFilmByPage from "./getFilmsByPage";
 import { pause } from "@/utils/pause";
 
-export default async function getAllFilms(): Promise<Film[]> {
+export default async function getAllFilms(endpoint: string): Promise<Film[]> {
   let page = 1;
   let maxPages = 1;
   let films: Film[] = [];
 
   while (page <= maxPages) {
-    const response = await getFilmByPage(page);
+    const response = await getFilmByPage(endpoint, page);
     if (response.status !== 200) {
       break;
     }

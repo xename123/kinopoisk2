@@ -1,5 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
+body {
+  min-height: 100dvh;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 400;
+  background: linear-gradient(
+    109.6deg,
+    rgb(43, 1, 91) 13.4%,
+    rgb(55, 0, 24) 100.2%
+  );
+  color: #fff;
+}
+
 * {
   padding: 0px;
   margin: 0px;
@@ -84,17 +96,6 @@ input[type="submit"] {
   background-color: transparent;
   background: none;
   cursor: pointer;
-}
-body {
-  min-height: 100dvh;
-  font-family: "Noto Sans", sans-serif;
-  font-weight: 400;
-  background: linear-gradient(
-    109.6deg,
-    rgb(43, 1, 91) 13.4%,
-    rgb(55, 0, 24) 100.2%
-  );
-  color: #fff;
 }
 
 a {
