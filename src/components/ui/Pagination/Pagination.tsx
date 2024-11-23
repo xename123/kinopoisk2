@@ -1,7 +1,7 @@
 import { getPaginationItems } from "@/utils/pagination.ts";
 import PageLink from "./PageLink.tsx";
 import Styles from "./Pagination.module.css";
-
+import { ReactSVG } from "react-svg";
 import arrow from "@/assets/pagination-arrow.svg";
 
 export type Props = {
@@ -25,7 +25,7 @@ export default function Pagination({
         disabled={currentPage === 1}
         onClick={() => setCurrentPage(currentPage - 1)}
       >
-        <img src={arrow} alt="asd" />
+        <ReactSVG src={arrow} />
       </PageLink>
       {pageNums.map((pageNum: number, idx: number) => (
         <PageLink
@@ -45,7 +45,7 @@ export default function Pagination({
         disabled={currentPage === lastPage}
         onClick={() => setCurrentPage(currentPage + 1)}
       >
-        <img src={arrow} alt="asd" />
+        <ReactSVG src={arrow} />
       </PageLink>
     </nav>
   );

@@ -1,0 +1,36 @@
+:root {
+  --pagination-color: #8848a0;
+  --pagination-hover-color: #8028a0;
+}
+:root.horror {
+  --pagination-color: #3c5a72;
+  --pagination-hover-color: #447094;
+}
+.horror body {
+  background: -webkit-linear-gradient(90deg, #000000, #030032);
+  background: linear-gradient(90deg, #000000, #030032);
+}
+:root.detective {
+  --pagination-color: #5a6a81;
+  --pagination-hover-color: #819abc;
+}
+.detective body {
+  background: -webkit-linear-gradient(90deg, #1f2937, #293647, #233043);
+  background: linear-gradient(90deg, #1f2937, #293647, #233043);
+}
+:root.action {
+  --pagination-color: #ff9f5a;
+  --pagination-hover-color: #ff6a00;
+}
+.action body {
+  background: -webkit-linear-gradient(90deg, #b32d0e, #a64500, #53176b);
+  background: linear-gradient(90deg, #b32d0e, #a64500, #53176b);
+}
+:root.drama {
+  --pagination-color: #644ba2;
+  --pagination-hover-color: #342360;
+}
+.drama body {
+  background: -webkit-linear-gradient(90deg, #a8a3d4, #a08db9, #342360);
+  background: linear-gradient(90deg, #a8a3d4, #a08db9, #342360);
+}
