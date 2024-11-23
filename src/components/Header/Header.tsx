@@ -2,27 +2,41 @@ import { FC } from "react";
 import Container from "../containers/Container";
 import logo from "@/assets/logo.svg";
 import Styles from "./Header.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const Header: FC = () => {
+  const location = useLocation();
+  const path = location.pathname;
   return (
     <header className={Styles["header"]}>
       <Container>
-        <a href="/">
+        <Link to={path !== "/" ? "/" : "/" + location.search}>
           <img className={Styles["header__logo"]} src={logo} alt="" />
-        </a>
+        </Link>
 
         <nav className={Styles["header__menu"]}>
           <ul className={Styles["header__list"]}>
-            <Link to={"/"} className={Styles["header__item"]}>
+            <Link
+              to={"/horror" + location.search}
+              className={Styles["header__item"]}
+            >
               Хорроры
             </Link>
-            <Link to={"/"} className={Styles["header__item"]}>
+            <Link
+              to={"/detective" + location.search}
+              className={Styles["header__item"]}
+            >
               Детективы
             </Link>
-            <Link to={"/"} className={Styles["header__item"]}>
+            <Link
+              to={"/action" + location.search}
+              className={Styles["header__item"]}
+            >
               Боевики
             </Link>
-            <Link to={"/"} className={Styles["header__item"]}>
+            <Link
+              to={"/drama" + location.search}
+              className={Styles["header__item"]}
+            >
               Драмы
             </Link>
           </ul>

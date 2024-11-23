@@ -9,9 +9,11 @@
 .page-link {
   position: relative;
   display: inline-flex;
-  background-color: #8848a0;
+  background-color: var(--pagination-color);
   padding: 10px 20px;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
 }
 
 .page-link:first-child {
@@ -30,7 +32,7 @@
 
 .page-link:hover,
 .page-link:focus {
-  background-color: #8028a0;
+  background-color: var(--pagination-hover-color);
 }
 
 .page-link:focus {
@@ -49,11 +51,17 @@
 .next-page {
   padding: 10px;
 }
-.prev-page img,
-.next-page img {
-  width: 25px;
-  height: 25px;
+.prev-page svg,
+.next-page svg {
+  width: 23px;
+  height: 23px;
+  transform: translate(0, 2px);
 }
-.next-page img {
-  transform: rotate(180deg);
+
+.prev-page path,
+.next-page path {
+  fill: white;
+}
+.next-page svg {
+  transform: rotate(180deg) translate(0, -2px);
 }
