@@ -32,7 +32,7 @@ export const genresIdEquals: genresIdEquals = {
   },
   adventure: {
     id: 7,
-    rusName: "приключения",
+    rusName: "Приключения",
   },
   biography: {
     id: 8,

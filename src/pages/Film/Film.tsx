@@ -8,11 +8,11 @@ import { useParams } from "react-router-dom";
 import Styles from "./Film.module.css";
 import star from "@/assets/reshot-icon-star-MHEGVSB4L7.svg";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import { genresIdEquals } from "@/backend/constansts/genresIdEquals";
 const Film = () => {
   let { filmId } = useParams<{ filmId: string }>();
   const [filmData, setFilmData] = useState<FilmDetailed | null>(null);
   const [isFound, setIsFound] = useState<boolean>(true);
-
   useAsyncEffect(async () => {
     if (filmId) {
       const film: FilmDetailed = await getFilmById(filmId);
@@ -35,7 +35,16 @@ const Film = () => {
                 {filmData.year && `(${filmData.year})`}
               </h2>
               <p className={Styles["film__genres"]}>
-                Жанры: {filmData.genres?.map((item) => item.genre + " ")}
+                Жанры:
+                {filmData.genres?.map((genre) => {
+                  const genreEn = Object.keys(genresIdEquals).find((item) => {
+                    return (
+                      genresIdEquals[item].rusName.toLowerCase() ===
+                      genre.genre.toLowerCase()
+                    );
+                  });
+                  return <a href={`/${genreEn}`}> {genre.genre}</a>;
+                })}
               </p>
               <p className={Styles["film__description"]}>
                 {filmData.description ||
