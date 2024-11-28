@@ -5,7 +5,7 @@ import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ErrorPage from "../ErrorPage/ErrorPage";
 
-const FilmsByGenre: FC = () => {
+const Featured: FC = () => {
   const genreName = useParams<{ genre: string }>();
   const genreData = genreName.genre && genresIdEquals[genreName.genre];
   useEffect(() => {
@@ -26,10 +26,10 @@ const FilmsByGenre: FC = () => {
           path={endpoints.filmsByGenre + genreData.id + "&"}
         />
       ) : (
-        <ErrorPage message="Фильмы в этом жанре отсутствуют" />
+        <ErrorPage message="Мы не нашли избранных фильмов" />
       )}
     </>
   );
 };
 
-export default FilmsByGenre;
+export default Featured;

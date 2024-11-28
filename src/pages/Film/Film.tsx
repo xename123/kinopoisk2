@@ -29,7 +29,7 @@ const Film = () => {
             <div className={Styles["film__image"]}>
               <img src={filmData.posterUrl} alt="image" />
             </div>
-            <div>
+            <div className={Styles["film__content"]}>
               <h2 className={Styles["film__title"]}>
                 {filmData.nameRu || filmData.nameEn || filmData.nameOriginal}{" "}
                 {filmData.year && `(${filmData.year})`}
@@ -59,10 +59,13 @@ const Film = () => {
               <a className={Styles["film__watch"]} href={filmData.webUrl}>
                 Посмотреть на кинопоиске
               </a>
+              <button className={Styles["film__feature"]} type="button">
+                Добавить в избранное
+              </button>
             </div>
           </div>
         )}
-        {isFound || <ErrorPage />}
+        {isFound || <ErrorPage message="Мы не нашли этот фильм" />}
       </Container>
     </div>
   );
