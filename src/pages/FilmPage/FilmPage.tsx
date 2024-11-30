@@ -1,7 +1,7 @@
 import getFilmById from "@/backend/api/films/getFilmById";
 import Container from "@/components/containers/Container";
 import useAsyncEffect from "@/hooks/useAsyncEffect";
-import { FilmDetailed } from "@/types/types";
+import { Film, FilmDetailed } from "@/types/types";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -9,7 +9,8 @@ import Styles from "./Film.module.css";
 import star from "@/assets/reshot-icon-star-MHEGVSB4L7.svg";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import { genresIdEquals } from "@/backend/constansts/genresIdEquals";
-const Film = () => {
+import { store } from "store/store";
+const FilmPage = () => {
   let { filmId } = useParams<{ filmId: string }>();
   const [filmData, setFilmData] = useState<FilmDetailed | null>(null);
   const [isFound, setIsFound] = useState<boolean>(true);
@@ -65,10 +66,14 @@ const Film = () => {
             </div>
           </div>
         )}
+
+        {store.getState().featuredFilms.map((item: Film) => {
+          return item.nameOriginal;
+        })}
         {isFound || <ErrorPage message="Мы не нашли этот фильм" />}
       </Container>
     </div>
   );
 };
 
-export default Film;
+export default FilmPage;

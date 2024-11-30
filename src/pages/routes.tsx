@@ -1,5 +1,5 @@
 import App from "../App";
-import Film from "./Film/Film";
+import FilmPage from "./FilmPage/FilmPage";
 import FilmsByGenre from "./FilmsByGenre/FilmsByGenre";
 
 export const routes = [
@@ -9,7 +9,7 @@ export const routes = [
   },
   {
     path: "/film/:filmId",
-    element: <Film />,
+    element: <FilmPage />,
   },
   {
     path: "/:genre",
