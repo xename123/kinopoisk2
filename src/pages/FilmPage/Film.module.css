@@ -40,7 +40,7 @@
 .film-card__rate span {
   font-size: 30px;
 }
-.film-card__rate img {
+.film-card__star {
   width: 70px;
   height: 70px;
 }

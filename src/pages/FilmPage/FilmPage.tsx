@@ -2,18 +2,32 @@ import getFilmById from "@/backend/api/films/getFilmById";
 import Container from "@/components/containers/Container";
 import useAsyncEffect from "@/hooks/useAsyncEffect";
 import { Film, FilmDetailed } from "@/types/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Styles from "./Film.module.css";
 import star from "@/assets/reshot-icon-star-MHEGVSB4L7.svg";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import { genresIdEquals } from "@/backend/constansts/genresIdEquals";
-import { store } from "store/store";
+import { store, AddNewFilm } from "@/store/store.ts";
+import { ReactSVG } from "react-svg";
 const FilmPage = () => {
   let { filmId } = useParams<{ filmId: string }>();
   const [filmData, setFilmData] = useState<FilmDetailed | null>(null);
   const [isFound, setIsFound] = useState<boolean>(true);
+  const [isFeatured, setIsFeatured] = useState<boolean>(false);
+
+  useEffect(() => {
+    const featuredFilms = store.getState().featuredFilms;
+    const isFeatureFilm = featuredFilms.find((item) => {
+      return item.kinopoiskId === filmId;
+    });
+    if (isFeatureFilm) {
+      console.log(isFeatureFilm);
+      setIsFeatured(true);
+    }
+  }, []);
+
   useAsyncEffect(async () => {
     if (filmId) {
       const film: FilmDetailed = await getFilmById(filmId);
@@ -21,7 +35,14 @@ const FilmPage = () => {
       setFilmData(film);
     }
   }, []);
-
+  function handleFeatureClick() {
+    if (!isFeatured && filmData) {
+      store.dispatch({
+        type: "addNewFilm",
+        film: filmData,
+      } satisfies AddNewFilm);
+    }
+  }
   return (
     <div className={Styles["film"]}>
       <Container>
@@ -52,16 +73,20 @@ const FilmPage = () => {
                   filmData.shortDescription ||
                   "Почему-то мы ничего не знаем про этот фильм..."}
               </p>
-              <p className={Styles["film-card__rate"]}>
+              <div className={Styles["film-card__rate"]}>
                 <span>Рейтинг:</span>
-                <img src={star} alt="star" />
+                <ReactSVG src={star} className={Styles["film-card__star"]} />
                 {filmData.ratingKinopoisk}
-              </p>
+              </div>
               <a className={Styles["film__watch"]} href={filmData.webUrl}>
                 Посмотреть на кинопоиске
               </a>
-              <button className={Styles["film__feature"]} type="button">
-                Добавить в избранное
+              <button
+                onClick={handleFeatureClick}
+                className={Styles["film__feature"]}
+                type="button"
+              >
+                {isFeatured ? "Удалить избранного" : "Добавить в избранное"}
               </button>
             </div>
           </div>

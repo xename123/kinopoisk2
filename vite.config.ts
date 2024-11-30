@@ -14,6 +14,7 @@ export default defineConfig({
       "@/ui": "/src/components/ui",
       "@/assets": "/src/assets",
       "@/pages": "/src/pages",
+      "@/store": "/src/store",
     },
   },
 });
